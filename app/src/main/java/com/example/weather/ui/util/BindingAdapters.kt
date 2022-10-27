@@ -21,6 +21,15 @@ fun TextView.bindTimeText(time: LocalDateTime) {
     text = time.format(DateTimeFormatter.ofPattern("h:mm a"))
 }
 
+@BindingAdapter("day")
+fun TextView.bindDayText(time: LocalDateTime) {
+    text = when (time.dayOfMonth) {
+        LocalDateTime.now().dayOfMonth -> "Today"
+        LocalDateTime.now().plusDays(1).dayOfMonth -> "Tomorrow"
+        else -> time.format(DateTimeFormatter.ofPattern("E"))
+    }
+}
+
 @SuppressLint("SetTextI18n")
 @BindingAdapter("temperature")
 fun TextView.bindTemperatureText(temp: Double) {

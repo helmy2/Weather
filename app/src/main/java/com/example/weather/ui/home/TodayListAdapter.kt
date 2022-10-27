@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weather.databinding.TodayItemBinding
-import com.example.weather.domain.model.WeatherData
+import com.example.weather.databinding.HourItemBinding
+import com.example.weather.domain.model.WeatherDetails
 
-class TodayListAdapter: ListAdapter<WeatherData, TodayWeatherViewHolder>(WeatherDiffCallback()) {
+class TodayListAdapter : ListAdapter<WeatherDetails, TodayWeatherViewHolder>(WeatherDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodayWeatherViewHolder {
         return TodayWeatherViewHolder.from(parent)
     }
@@ -19,27 +19,27 @@ class TodayListAdapter: ListAdapter<WeatherData, TodayWeatherViewHolder>(Weather
     }
 }
 
-class WeatherDiffCallback : DiffUtil.ItemCallback<WeatherData>() {
-    override fun areItemsTheSame(oldItem: WeatherData, newItem: WeatherData): Boolean {
+class WeatherDiffCallback : DiffUtil.ItemCallback<WeatherDetails>() {
+    override fun areItemsTheSame(oldItem: WeatherDetails, newItem: WeatherDetails): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: WeatherData, newItem: WeatherData): Boolean {
+    override fun areContentsTheSame(oldItem: WeatherDetails, newItem: WeatherDetails): Boolean {
         return oldItem == newItem
     }
 }
 
-class TodayWeatherViewHolder(private val binding: TodayItemBinding) :
+class TodayWeatherViewHolder(private val binding: HourItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: WeatherData) {
+    fun bind(item: WeatherDetails) {
         binding.item = item
     }
 
     companion object {
         fun from(parent: ViewGroup): TodayWeatherViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
-            val binding = TodayItemBinding.inflate(layoutInflater, parent, false)
+            val binding = HourItemBinding.inflate(layoutInflater, parent, false)
             return TodayWeatherViewHolder(binding)
         }
     }

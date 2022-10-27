@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.weather.R
 import com.example.weather.databinding.FragmentHomeBinding
-import com.example.weather.domain.model.WeatherData
+import com.example.weather.domain.model.WeatherDetails
+import com.example.weather.domain.model.WeatherDay
 import com.example.weather.domain.model.WeatherType
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDateTime
@@ -16,28 +16,56 @@ import java.time.LocalDateTime
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-    val list = listOf(
-        WeatherData(
+    private val list = listOf(
+        WeatherDetails(
             LocalDateTime.now(),
             25.0, 1012.2, 9.0, 89.0,
             WeatherType.fromWMO(2)
         ),
-        WeatherData(
+        WeatherDetails(
             LocalDateTime.now(),
             55.0, 1012.2, 9.0, 89.0,
             WeatherType.fromWMO(45)
         ),
-        WeatherData(
+        WeatherDetails(
             LocalDateTime.now(),
             25.0, 1012.2, 9.0, 89.0,
             WeatherType.fromWMO(55)
         ),
-        WeatherData(
+        WeatherDetails(
             LocalDateTime.now(),
             25.0, 1012.2, 9.0, 89.0,
             WeatherType.fromWMO(77)
         )
     )
+
+    private val list2 = listOf(
+        WeatherDay(
+            LocalDateTime.now(),
+            25.0, 19.2,
+            WeatherType.fromWMO(2).weatherDesc,
+            WeatherType.fromWMO(2)
+        ),
+        WeatherDay(
+            LocalDateTime.now(),
+            25.0, 19.2,
+            WeatherType.fromWMO(2).weatherDesc,
+            WeatherType.fromWMO(2)
+        ),
+        WeatherDay(
+            LocalDateTime.now(),
+            25.0, 19.2,
+            WeatherType.fromWMO(55).weatherDesc,
+            WeatherType.fromWMO(55),
+        ),
+        WeatherDay(
+            LocalDateTime.now(),
+            25.0, 19.2,
+            WeatherType.fromWMO(77).weatherDesc,
+            WeatherType.fromWMO(77),
+        ),
+    )
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,11 +76,16 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = TodayListAdapter()
-        binding.recyclerView.adapter = adapter
+        val todayAdapter = TodayListAdapter()
+        val nextForecastAdapter = NextForecastListAdapter()
+
+        binding.todayRecyclerView.adapter = todayAdapter
+        binding.nextForecastrecyclerView.adapter = nextForecastAdapter
+
         binding.item = list.first()
         binding.maxTemp = 30.0
         binding.minTemp = 21.0
-        adapter.submitList(list)
+        todayAdapter.submitList(list)
+        nextForecastAdapter.submitList(list2)
     }
 }

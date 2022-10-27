@@ -2,11 +2,10 @@ package com.example.weather.domain.model
 
 import java.time.LocalDateTime
 
-data class WeatherData(
+data class WeatherDay(
     val time: LocalDateTime,
-    val temperature: Double,
-    val pressure: Double,
-    val windSpeed: Double,
-    val humidity: Double,
+    val maxTemperature: Double,
+    val minTemperature: Double,
+    val description: String,
     val weatherType: WeatherType
 )
