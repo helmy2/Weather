@@ -15,6 +15,7 @@ import java.time.LocalDateTime
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
+
     private lateinit var binding: FragmentHomeBinding
     private val list = listOf(
         WeatherDetails(
