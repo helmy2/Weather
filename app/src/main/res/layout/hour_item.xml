@@ -19,11 +19,13 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:padding="8dp"
+            android:background="@color/item_color_blue">
 
             <TextView
                 android:id="@+id/firstTextView"
                 temperature="@{item.temperature}"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@+id/imageView6"
@@ -51,6 +53,7 @@
             <TextView
                 android:id="@+id/secondTextView"
                 time="@{item.time}"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
